@@ -8,7 +8,6 @@ function EditProfile({ profile, onSave, onCancel }) {
     bio: profile.bio || '',
     skills: profile.skills || '',
     profile_picture: profile.profile_picture || '',
-    // ADD THESE THREE NEW LINES:
     twitter: profile.twitter || '',
     linkedin: profile.linkedin || '',
     github: profile.github || ''
@@ -27,7 +26,8 @@ function EditProfile({ profile, onSave, onCancel }) {
     e.preventDefault();
     setSaving(true);
     
-    axios.put('http://127.0.0.1:8000/api/profile/', formData)
+    // FIXED: Changed from .get to .put
+    axios.put('https://mohith123.pythonanywhere.com/api/profile/', formData)
       .then(response => {
         setSaving(false);
         onSave(response.data);
@@ -87,7 +87,6 @@ function EditProfile({ profile, onSave, onCancel }) {
             />
           </div>
 
-          {/* NEW SECTION: Social Links */}
           <div className="form-group">
             <label>Twitter URL:</label>
             <input

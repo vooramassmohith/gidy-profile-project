@@ -7,7 +7,8 @@ function Skill({ skill, onEndorse }) {
 
   const handleEndorse = () => {
     setEndorsing(true);
-    axios.post(`http://127.0.0.1:8000/api/endorse/${skill.id}/`)
+    // CHANGED: from localhost to live PythonAnywhere URL
+    axios.post(`https://mohith123.pythonanywhere.com/api/endorse/${skill.id}/`)
       .then(response => {
         setEndorsing(false);
         onEndorse(skill.id, response.data.endorsements);

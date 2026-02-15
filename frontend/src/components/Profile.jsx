@@ -11,7 +11,7 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
 
   const fetchProfile = () => {
-    axios.get('http://127.0.0.1:8000/api/profile/')
+    axios.get('https://mohith123.pythonanywhere.com/api/profile/')
       .then(response => {
         setProfile(response.data);
         setLoading(false);

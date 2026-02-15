@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3qap1&5-@2k=v-^77c724mqv5j#4@673u^mfkvhix=cy)+owyw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mohith123.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -90,10 +90,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Or if you want to be more specific:
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://localhost:5174",  # Your React port
+    "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
+    "https://gidy-profile-project.vercel.app",  # Add your Vercel URL
 ]
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
