@@ -1,0 +1,36 @@
+.skill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.skill-name {
+  font-weight: bold;
+  flex: 2;
+}
+
+.skill-endorsements {
+  flex: 1;
+  color: #666;
+}
+
+.endorse-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 0.5;
+}
+
+.endorse-btn:hover {
+  background-color: #218838;
+}
+
+.endorse-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
