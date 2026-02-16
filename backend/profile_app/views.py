@@ -9,59 +9,41 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
     
     def get_object(self):
+        # always use profile with ID 1 (single profile site)
         profile, created = Profile.objects.get_or_create(id=1)
-        # Create skills from text if they don't exist
+        
+        # convert comma-separated skills text into separate Skill objects
         if profile.skills and not profile.skill_set.exists():
-            self._create_skills_from_text(profile)
-        return profile
-    
-    def perform_update(self, serializer):
-        # Save the profile first
-        profile = serializer.save()
-        
-        # Now handle skills based on the new skills text
-        if profile.skills:
-            self._update_skills_from_text(profile)
-    
-    def _create_skills_from_text(self, profile):
-        """Create skill objects from comma-separated text"""
-        skill_names = [s.strip() for s in profile.skills.split(',') if s.strip()]
-        for skill_name in skill_names:
-            Skill.objects.create(
-                profile=profile,
-                name=skill_name,
-                endorsements=0
-            )
-    
-    def _update_skills_from_text(self, profile):
-        """Update skills based on new text, preserving endorsements"""
-        # Get new skill names from text
-        new_skill_names = [s.strip() for s in profile.skills.split(',') if s.strip()]
-        
-        # Get existing skills
-        existing_skills = {skill.name: skill for skill in profile.skill_set.all()}
-        
-        # Track which skills to keep/delete/add
-        skills_to_delete = []
-        
-        # Check each existing skill
-        for skill_name, skill in existing_skills.items():
-            if skill_name not in new_skill_names:
-                # This skill was removed, mark for deletion
-                skills_to_delete.append(skill)
-        
-        # Delete removed skills
-        for skill in skills_to_delete:
-            skill.delete()
-        
-        # Add new skills
-        for skill_name in new_skill_names:
-            if skill_name not in existing_skills:
+            skill_names = [s.strip() for s in profile.skills.split(',') if s.strip()]
+            for skill_name in skill_names:
                 Skill.objects.create(
                     profile=profile,
                     name=skill_name,
                     endorsements=0
                 )
+        return profile
+    
+    def perform_update(self, serializer):
+        profile = serializer.save()
+        if profile.skills:
+            # when skills text changes, update Skill objects
+            # preserve endorsements for skills that still exist
+            new_skill_names = [s.strip() for s in profile.skills.split(',') if s.strip()]
+            existing_skills = {skill.name: skill for skill in profile.skill_set.all()}
+            
+            # remove skills that are no longer in the list
+            for skill_name, skill in existing_skills.items():
+                if skill_name not in new_skill_names:
+                    skill.delete()
+            
+            # add new skills with 0 endorsements
+            for skill_name in new_skill_names:
+                if skill_name not in existing_skills:
+                    Skill.objects.create(
+                        profile=profile,
+                        name=skill_name,
+                        endorsements=0
+                    )
 
 @api_view(['POST'])
 def endorse_skill(request, skill_id):
@@ -71,4 +53,4 @@ def endorse_skill(request, skill_id):
         skill.save()
         return Response({'endorsements': skill.endorsements})
     except Skill.DoesNotExist:
-        return Response({'error': 'Skill not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'Skill not found'}, status=404)

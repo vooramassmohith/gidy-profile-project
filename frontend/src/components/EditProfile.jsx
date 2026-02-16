@@ -26,7 +26,7 @@ function EditProfile({ profile, onSave, onCancel }) {
     e.preventDefault();
     setSaving(true);
     
-    // FIXED: Changed from .get to .put
+
     axios.put('https://mohith123.pythonanywhere.com/api/profile/', formData)
       .then(response => {
         setSaving(false);

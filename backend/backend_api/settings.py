@@ -84,16 +84,16 @@ DATABASES = {
     }
 }
 
-# CORS settings
+
+# Allow React frontend to access the API
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Or if you want to be more specific:
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
-    "https://gidy-profile-project.vercel.app",  # Add your Vercel URL
+    "https://gidy-profile-project.vercel.app",
 ]
 
 # Password validation

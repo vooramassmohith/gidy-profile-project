@@ -70,7 +70,7 @@ function Profile() {
         <h1 className="profile-name">{profile.name || 'No name added'}</h1>
         <p className="profile-bio"><strong>Bio:</strong> {profile.bio || 'No bio added'}</p>
         
-        {/* Social Links Section */}
+
         <div className="social-links">
           <h3>Social Links</h3>
           <div className="social-icons">

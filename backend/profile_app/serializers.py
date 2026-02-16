@@ -7,9 +7,10 @@ class SkillSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'endorsements']
 
 class ProfileSerializer(serializers.ModelSerializer):
+    # include all skills as a list in the response
     skills_list = SkillSerializer(source='skill_set', many=True, read_only=True)
     
     class Meta:
         model = Profile
-        fields = ['id', 'name', 'bio', 'profile_picture', 'skills', 'skills_list', 
-                  'twitter', 'linkedin', 'github']  # Added social links here
+        fields = ['id', 'name', 'bio', 'profile_picture', 'skills', 
+                  'skills_list', 'twitter', 'linkedin', 'github']
