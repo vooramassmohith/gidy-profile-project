@@ -1,16 +1,62 @@
-# React + Vite
+# Gidy Profile Page - Full Stack Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Demo
+🔗 **Frontend:** https://gidy-profile-project.vercel.app  
+🔗 **Backend API:** https://mohith123.pythonanywhere.com/api/profile/
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📋 Tech Stack
 
-## React Compiler
+### Frontend
+- **React.js** (with Vite)
+- **CSS3** (custom styling, no frameworks)
+- **Axios** for API calls
+- **Deployed on:** Vercel
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Backend
+- **Python** / **Django**
+- **Django REST Framework**
+- **SQLite** database
+- **Deployed on:** PythonAnywhere
 
-## Expanding the ESLint configuration
+### Additional Tools
+- Git & GitHub
+- django-cors-headers
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Setup Instructions (Run Locally)
+
+### Prerequisites
+- Python 3.8+ installed
+- Node.js 16+ installed
+- Git installed
+
+### Backend Setup
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/vooramassmohith/gidy-profile-project.git
+cd gidy-profile-project/backend
+
+# 2. Create and activate virtual environment
+# Windows:
+python -m venv venv
+venv\Scripts\activate
+
+# Mac/Linux:
+python3 -m venv venv
+source venv/bin/activate
+
+# 3. Install dependencies
+pip install django djangorestframework django-cors-headers
+
+# 4. Run migrations
+python manage.py migrate
+
+# 5. Create superuser (for admin access)
+python manage.py createsuperuser
+
+# 6. Start backend server
+python manage.py runserver
